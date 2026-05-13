@@ -28,6 +28,7 @@ import { randomBytes } from 'crypto';
 import { execSync } from 'child_process';
 import { tmpdir } from 'os';
 import qrcode from 'qrcode-terminal';
+import QRCode from 'qrcode';
 import { matchesAllowedUser, parseAllowedUsers } from './allowlist.js';
 
 // Parse CLI args
@@ -183,13 +184,41 @@ async function startSocket() {
 
   sock.ev.on('creds.update', () => { saveCreds(); lidToPhone = buildLidMap(); });
 
+  // Throttle QR display to avoid terminal spam
+  let lastQrShown = 0;
+  const QR_THROTTLE_MS = 15000;
+
   sock.ev.on('connection.update', (update) => {
     const { connection, lastDisconnect, qr } = update;
 
     if (qr) {
-      console.log('\n📱 Scan this QR code with WhatsApp on your phone:\n');
-      qrcode.generate(qr, { small: true });
-      console.log('\nWaiting for scan...\n');
+      const now = Date.now();
+      const qrPngPath = path.join(SESSION_DIR, 'latest-qr.png');
+      const qrTxtPath = path.join(SESSION_DIR, 'latest-qr.txt');
+
+      // Always save QR files so user can open the PNG if terminal is messy
+      try {
+        writeFileSync(qrTxtPath, qr, 'utf8');
+        QRCode.toFile(qrPngPath, qr, { width: 900, margin: 2 }, (err) => {
+          if (err) {
+            console.error(`Failed to write QR PNG: ${err.message}`);
+          }
+        });
+      } catch (err) {
+        console.error(`Failed to save QR files: ${err.message}`);
+      }
+
+      // Only print to terminal every N seconds to avoid spam
+      if (now - lastQrShown > QR_THROTTLE_MS) {
+        lastQrShown = now;
+        console.log('\n═══════════════════════════════════════════════════════════════');
+        console.log('  📱  SCAN THIS QR CODE WITH WHATSAPP ON YOUR PHONE');
+        console.log('═══════════════════════════════════════════════════════════════\n');
+        qrcode.generate(qr, { small: true });
+        console.log(`\n💡 QR also saved as image: ${qrPngPath}`);
+        console.log('   (Open this PNG file if the terminal QR is hard to scan)\n');
+        console.log('⏳ Waiting for scan... (QR refreshes every ~20 seconds)\n');
+      }
     }
 
     if (connection === 'close') {
