@@ -51,13 +51,13 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 _NEXAI_MODEL_WARNING = (
-    "Nous Research nexai 3 & 4 models are NOT agentic and are not designed "
+    "nexai 3 & 4 models are NOT agentic and are not designed "
     "for use with nexai Agent. They lack the tool-calling capabilities "
     "required for agent workflows. Consider using an agentic model instead "
     "(Claude, GPT, Gemini, DeepSeek, etc.)."
 )
 
-# Match only the real Nous Research nexai 3 / nexai 4 chat families.
+# Match only the real nexai 3 / nexai 4 chat families.
 # The previous substring check (`"nexai" in name.lower()`) false-positived on
 # unrelated local Modelfiles like ``nexai-brain:qwen3-14b-ctx16k`` that just
 # happen to carry "nexai" in their tag but are fully tool-capable.

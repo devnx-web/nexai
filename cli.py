@@ -2141,7 +2141,7 @@ def _build_compact_banner() -> str:
 
     w = min(shutil.get_terminal_size().columns - 2, 88)
     if w < 30:
-        return f"\n[{title_color}]{tiny_line}[/] [dim {dim_color}]- Nous Research[/]\n"
+        return f"\n[{title_color}]{tiny_line}[/] [dim {dim_color}]- DevNX[/]\n"
 
     inner = w - 2  # inside the box border
     bar = "═" * w
@@ -4306,7 +4306,7 @@ class nexaiCLI:
         if is_nous_nexai_non_agentic(model_name):
             self._console_print()
             self._console_print(
-                "[bold yellow]⚠  Nous Research nexai 3 & 4 models are NOT agentic and are not "
+                "[bold yellow]⚠  nexai 3 & 4 models are NOT agentic and are not "
                 "designed for use with nexai Agent.[/]"
             )
             self._console_print(

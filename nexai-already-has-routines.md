@@ -157,4 +157,4 @@ GitHub: [github.com/NousResearch/nexai-agent](https://github.com/NousResearch/ne
 
 ---
 
-*NexAi Agent is built by [Nous Research](https://nousresearch.com). Open source, model-agnostic, runs on your infrastructure.*
+*NexAi Agent is built by [DevNX](https://devnx.com). Open source, model-agnostic, runs on your infrastructure.*
