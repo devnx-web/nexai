@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "nexai-agent",
+  "display_name": "nexai Agent",
+  "description": "AI agent by Nous Research with 90+ tools, persistent memory, and multi-platform support",
+  "icon": "icon.svg",
+  "distribution": {
+    "type": "command",
+    "command": "nexai",
+    "args": ["acp"]
+  }
+}
