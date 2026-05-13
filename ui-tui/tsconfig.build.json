@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@nexai/ink": ["src/types/nexai-ink.d.ts"]
-    }
-  }
-}
