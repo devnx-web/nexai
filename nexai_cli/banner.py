@@ -178,6 +178,15 @@ def _check_via_local_git(repo_dir: Path) -> Optional[int]:
 def check_for_updates() -> Optional[int]:
     """Check whether a nexai update is available.
 
+    DISABLED: No upstream update checks to avoid external dependencies.
+    Always returns None so the CLI never shows update prompts.
+    """
+    return None
+
+
+def _disabled_check_for_updates() -> Optional[int]:
+    """Original update check logic — disabled to avoid external dependencies.
+
     Two paths: if ``NEXAI_REVISION`` is set (nix builds embed it), compare
     it to upstream main via ``git ls-remote``. Otherwise look for a local
     git checkout and count commits behind ``origin/main``.

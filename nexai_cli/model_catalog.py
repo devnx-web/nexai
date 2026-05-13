@@ -33,7 +33,7 @@ Schema (version 1)
              "metadata": {...}}          # free-form, model-level
           ]
         },
-        "nous": {...}
+        # "nous" provider removed
       }
     }
 
