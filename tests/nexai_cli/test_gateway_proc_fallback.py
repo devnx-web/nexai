@@ -3,7 +3,7 @@
 Verifies that _scan_gateway_pids() uses /proc/*/cmdline when available
 (Docker without procps) and falls back to ps only when /proc is absent.
 
-See: NousResearch/nexai-agent#7622
+See: DevNX/nexai-agent#7622
 """
 
 import os

@@ -40,7 +40,7 @@ function Write-Banner {
     Write-Host "┌─────────────────────────────────────────────────────────┐" -ForegroundColor Magenta
     Write-Host "│             ⚕ nexai Agent Installer                    │" -ForegroundColor Magenta
     Write-Host "├─────────────────────────────────────────────────────────┤" -ForegroundColor Magenta
-    Write-Host "│  An open source AI agent by Nous Research.              │" -ForegroundColor Magenta
+    Write-Host "│  An open source AI agent by DevNX.              │" -ForegroundColor Magenta
     Write-Host "└─────────────────────────────────────────────────────────┘" -ForegroundColor Magenta
     Write-Host ""
 }
@@ -928,7 +928,7 @@ except Exception:
     # tinker-atropos (RL training) is optional and OFF by default.  Matches the
     # Linux/macOS install.sh behavior.  Reasons not to auto-install:
     #   - tinker-atropos/pyproject.toml pulls atroposlib + tinker from git+https
-    #     (NousResearch/atropos + thinking-machines-lab/tinker) which can fail on
+    #     (DevNX/atropos + thinking-machines-lab/tinker) which can fail on
     #     locked-down networks, flaky DNS, or rate-limited github.com and would
     #     previously kill the whole install mid-flight on Windows.
     #   - It's an RL training submodule, not part of the default agent surface.

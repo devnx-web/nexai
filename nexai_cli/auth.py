@@ -1,7 +1,7 @@
 """
 Multi-provider authentication system for nexai Agent.
 
-Supports OAuth device code flows (Nous Portal, future: OpenAI Codex) and
+Supports OAuth device code flows (NexAi Portal, future: OpenAI Codex) and
 traditional API key providers (OpenRouter, custom endpoints). Auth state
 is persisted in ~/.nexai/auth.json with cross-process file locking.
 
@@ -63,9 +63,9 @@ except Exception:
 AUTH_STORE_VERSION = 1
 AUTH_LOCK_TIMEOUT_SECONDS = 15.0
 
-# Nous Portal defaults
-DEFAULT_NOUS_PORTAL_URL = "https://portal.nousresearch.com"
-DEFAULT_NOUS_INFERENCE_URL = "https://inference-api.nousresearch.com/v1"
+# NexAi Portal defaults
+DEFAULT_NOUS_PORTAL_URL = "https://portal.example.com"
+DEFAULT_NOUS_INFERENCE_URL = "https://api.example.com/v1"
 DEFAULT_NOUS_CLIENT_ID = "nexai-cli"
 DEFAULT_NOUS_SCOPE = "inference:mint_agent_key"
 DEFAULT_AGENT_KEY_MIN_TTL_SECONDS = 30 * 60  # 30 minutes
@@ -95,7 +95,7 @@ QWEN_ACCESS_TOKEN_REFRESH_SKEW_SECONDS = 120
 DEFAULT_SPOTIFY_ACCOUNTS_BASE_URL = "https://accounts.spotify.com"
 DEFAULT_SPOTIFY_API_BASE_URL = "https://api.spotify.com/v1"
 DEFAULT_SPOTIFY_REDIRECT_URI = "http://127.0.0.1:43827/spotify/callback"
-SPOTIFY_DOCS_URL = "https://nexai-agent.nousresearch.com/docs/user-guide/features/spotify"
+SPOTIFY_DOCS_URL = "https://docs.nexai.dev/docs/user-guide/features/spotify"
 SPOTIFY_DASHBOARD_URL = "https://developer.spotify.com/dashboard"
 SPOTIFY_ACCESS_TOKEN_REFRESH_SKEW_SECONDS = 120
 DEFAULT_SPOTIFY_SCOPE = " ".join((
@@ -147,7 +147,7 @@ class ProviderConfig:
 
 
 PROVIDER_REGISTRY: Dict[str, ProviderConfig] = {
-    # "nous" provider removed — was a Nous Research portal integration.
+    # "nous" provider removed — was a DevNX portal integration.
     "openai-codex": ProviderConfig(
         id="openai-codex",
         name="OpenAI Codex",
@@ -705,14 +705,14 @@ def format_auth_error(error: Exception) -> str:
 
     if error.code == "subscription_required":
         return (
-            "No active paid subscription found on Nous Portal. "
+            "No active paid subscription found on NexAi Portal. "
             "Please purchase/activate a subscription, then retry."
         )
 
     if error.code == "insufficient_credits":
         return (
             "Subscription credits are exhausted. "
-            "Top up/renew credits in Nous Portal, then retry."
+            "Top up/renew credits in NexAi Portal, then retry."
         )
 
     if error.code == "temporarily_unavailable":
@@ -2810,7 +2810,7 @@ def _poll_for_token(
 
 
 # =============================================================================
-# Nous Portal — token refresh, agent key minting, model discovery
+# NexAi Portal — token refresh, agent key minting, model discovery
 # =============================================================================
 
 # -----------------------------------------------------------------------------
@@ -3144,7 +3144,7 @@ def _refresh_access_token(
     description = str(error_payload.get("error_description") or "Refresh token exchange failed")
     relogin = code in {"invalid_grant", "invalid_token"}
 
-    # Detect the OAuth 2.1 "refresh token reuse" signal from the Nous portal
+    # Detect the OAuth 2.1 "refresh token reuse" signal from the NexAi portal
     # server and surface an actionable message.  This fires when an external
     # process (health-check script, monitoring tool, custom self-heal hook)
     # called POST /api/oauth/token with nexai's refresh_token without
@@ -3154,7 +3154,7 @@ def _refresh_access_token(
     lowered = description.lower()
     if "reuse" in lowered or "reuse detected" in lowered:
         description = (
-            "Nous Portal detected refresh-token reuse and revoked this session.\n"
+            "NexAi Portal detected refresh-token reuse and revoked this session.\n"
             "This usually means an external process (monitoring script, "
             "custom self-heal hook, or another nexai install sharing "
             "~/.nexai/auth.json) called POST /api/oauth/token with nexai's "
@@ -3272,14 +3272,14 @@ def resolve_nous_access_token(
     ca_bundle: Optional[str] = None,
     refresh_skew_seconds: int = ACCESS_TOKEN_REFRESH_SKEW_SECONDS,
 ) -> str:
-    """Resolve a refresh-aware Nous Portal access token for managed tool gateways."""
+    """Resolve a refresh-aware NexAi Portal access token for managed tool gateways."""
     with _auth_store_lock():
         auth_store = _load_auth_store()
         state = _load_provider_state(auth_store, "nous")
 
         if not state:
             raise AuthError(
-                "nexai is not logged into Nous Portal.",
+                "nexai is not logged into NexAi Portal.",
                 provider="nous",
                 relogin_required=True,
             )
@@ -3299,7 +3299,7 @@ def resolve_nous_access_token(
             refresh_token = state.get("refresh_token")
             if not isinstance(access_token, str) or not access_token:
                 raise AuthError(
-                    "No access token found for Nous Portal login.",
+                    "No access token found for NexAi Portal login.",
                     provider="nous",
                     relogin_required=True,
                 )
@@ -3558,7 +3558,7 @@ def resolve_nous_runtime_credentials(
         state = _load_provider_state(auth_store, "nous")
 
         if not state:
-            raise AuthError("nexai is not logged into Nous Portal.",
+            raise AuthError("nexai is not logged into NexAi Portal.",
                             provider="nous", relogin_required=True)
 
         portal_base_url = (
@@ -3614,7 +3614,7 @@ def resolve_nous_runtime_credentials(
             refresh_token = state.get("refresh_token")
 
             if not isinstance(access_token, str) or not access_token:
-                raise AuthError("No access token found for Nous Portal login.",
+                raise AuthError("No access token found for NexAi Portal login.",
                                 provider="nous", relogin_required=True)
 
             # Step 1: refresh access token if expiring
@@ -5160,7 +5160,7 @@ def _nous_device_code_login(
                 "portal_base_url", DEFAULT_NOUS_PORTAL_URL
             ).rstrip("/")
             print()
-            print("Your Nous Portal account does not have an active subscription.")
+            print("Your NexAi Portal account does not have an active subscription.")
             print(f"  Subscribe here: {portal_url}/billing")
             print()
             print("After subscribing, run `nexai model` again to finish setup.")
@@ -5169,7 +5169,7 @@ def _nous_device_code_login(
 
 
 def _login_nous(args, pconfig: ProviderConfig) -> None:
-    """Nous Portal device authorization flow."""
+    """NexAi Portal device authorization flow."""
     timeout_seconds = getattr(args, "timeout", None) or 15.0
     insecure = bool(getattr(args, "insecure", False))
     ca_bundle = (
@@ -5306,7 +5306,7 @@ def _login_nous(args, pconfig: ProviderConfig) -> None:
                 print("No free models currently available.")
                 print(f"Upgrade at {_url} to access paid models.")
             else:
-                print("No curated models available for Nous Portal.")
+                print("No curated models available for NexAi Portal.")
         except Exception as exc:
             message = format_auth_error(exc) if isinstance(exc, AuthError) else str(exc)
             print()
@@ -5331,7 +5331,7 @@ def _login_nous(args, pconfig: ProviderConfig) -> None:
                 _save_auth_store(auth_store)
             print()
             print("No provider change. Nous credentials saved for future use.")
-            print("  Run `nexai model` again to switch to Nous Portal.")
+            print("  Run `nexai model` again to switch to NexAi Portal.")
             return
 
         config_path = _update_config_for_provider(

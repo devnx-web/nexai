@@ -775,7 +775,7 @@ def _run_post_setup(post_setup_key: str):
                 "    Pull the latest image to get the bundled Chromium:"
             )
             _print_info(
-                "      docker pull ghcr.io/nousresearch/nexai-agent:latest"
+                "      docker pull ghcr.io/YOUR_ORG/nexai-agent:latest"
             )
             return
 
@@ -1960,7 +1960,7 @@ def _configure_provider(provider: dict, config: dict):
     if provider.get("requires_nous_auth"):
         features = get_nous_subscription_features(config)
         if not features.nous_auth_present:
-            _print_warning("  Nous Subscription is only available after logging into Nous Portal.")
+            _print_warning("  Nous Subscription is only available after logging into NexAi Portal.")
             return
 
     # Set TTS provider in config if applicable
@@ -2235,7 +2235,7 @@ def _reconfigure_provider(provider: dict, config: dict):
     if provider.get("requires_nous_auth"):
         features = get_nous_subscription_features(config)
         if not features.nous_auth_present:
-            _print_warning("  Nous Subscription is only available after logging into Nous Portal.")
+            _print_warning("  Nous Subscription is only available after logging into NexAi Portal.")
             return
 
     if provider.get("tts_provider"):
@@ -2393,7 +2393,7 @@ def tools_command(args=None, first_install: bool = False, config: dict = None):
     print(color("⚕ nexai Tool Configuration", Colors.CYAN, Colors.BOLD))
     print(color("  Enable or disable tools per platform.", Colors.DIM))
     print(color("  Tools that need API keys will be configured when enabled.", Colors.DIM))
-    print(color("  Guide: https://nexai-agent.nousresearch.com/docs/user-guide/features/tools", Colors.DIM))
+    print(color("  Guide: https://docs.nexai.dev/docs/user-guide/features/tools", Colors.DIM))
     print()
 
     # ── First-time install: linear flow, no platform menu ──

@@ -8,13 +8,13 @@ platforms: [linux, macos, windows]
 metadata:
   nexai:
     tags: [nexai, setup, configuration, multi-agent, spawning, cli, gateway, development]
-    homepage: https://github.com/NousResearch/nexai-agent
+    homepage: https://github.com/DevNX/nexai-agent
     related_skills: [claude-code, codex, opencode]
 ---
 
 # NexAi Agent
 
-NexAi Agent is an open-source AI agent framework by Nous Research that runs in your terminal, messaging platforms, and IDEs. It belongs to the same category as Claude Code (Anthropic), Codex (OpenAI), and OpenClaw — autonomous coding and task-execution agents that use tool calling to interact with your system. nexai works with any LLM provider (OpenRouter, Anthropic, OpenAI, DeepSeek, local models, and 15+ others) and runs on Linux, macOS, and WSL.
+NexAi Agent is an open-source AI agent framework by DevNX that runs in your terminal, messaging platforms, and IDEs. It belongs to the same category as Claude Code (Anthropic), Codex (OpenAI), and OpenClaw — autonomous coding and task-execution agents that use tool calling to interact with your system. nexai works with any LLM provider (OpenRouter, Anthropic, OpenAI, DeepSeek, local models, and 15+ others) and runs on Linux, macOS, and WSL.
 
 What makes nexai different:
 
@@ -29,13 +29,13 @@ People use nexai for software development, research, system administration, data
 
 **This skill helps you work with NexAi Agent effectively** — setting it up, configuring features, spawning additional agent instances, troubleshooting issues, finding the right commands and settings, and understanding how the system works when you need to extend or contribute to it.
 
-**Docs:** https://nexai-agent.nousresearch.com/docs/
+**Docs:** https://docs.nexai.dev/docs/
 
 ## Quick Start
 
 ```bash
 # Install
-curl -fsSL https://raw.githubusercontent.com/NousResearch/nexai-agent/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/DevNX/nexai-agent/main/scripts/install.sh | bash
 
 # Interactive chat (default)
 nexai
@@ -151,7 +151,7 @@ nexai gateway setup        Configure platforms
 
 Supported platforms: Telegram, Discord, Slack, WhatsApp, Signal, Email, SMS, Matrix, Mattermost, Home Assistant, DingTalk, Feishu, WeCom, BlueBubbles (iMessage), Weixin (WeChat), API Server, Webhooks. Open WebUI connects via the API Server adapter.
 
-Platform docs: https://nexai-agent.nousresearch.com/docs/user-guide/messaging/
+Platform docs: https://docs.nexai.dev/docs/user-guide/messaging/
 
 ### Sessions
 
@@ -230,7 +230,7 @@ nexai uninstall            Uninstall nexai
 
 Type these during an interactive chat session. New commands land fairly
 often; if something below looks stale, run `/help` in-session for the
-authoritative list or see the [live slash commands reference](https://nexai-agent.nousresearch.com/docs/reference/slash-commands).
+authoritative list or see the [live slash commands reference](https://docs.nexai.dev/docs/reference/slash-commands).
 The registry of record is `nexai_cli/commands.py` — every consumer
 (autocomplete, Telegram menu, Slack mapping, `/help`) derives from it.
 
@@ -362,7 +362,7 @@ Edit with `nexai config edit` or `nexai config set section.key value`.
 | `delegation` | `model`, `provider`, `base_url`, `api_key`, `max_iterations` (50), `reasoning_effort` |
 | `checkpoints` | `enabled`, `max_snapshots` (50) |
 
-Full config reference: https://nexai-agent.nousresearch.com/docs/user-guide/configuration
+Full config reference: https://docs.nexai.dev/docs/user-guide/configuration
 
 ### Providers
 
@@ -372,7 +372,7 @@ Full config reference: https://nexai-agent.nousresearch.com/docs/user-guide/conf
 |----------|------|-------------|
 | OpenRouter | API key | `OPENROUTER_API_KEY` |
 | Anthropic | API key | `ANTHROPIC_API_KEY` |
-| Nous Portal | OAuth | `nexai auth` |
+| NexAi Portal | OAuth | `nexai auth` |
 | OpenAI Codex | OAuth | `nexai auth` |
 | GitHub Copilot | Token | `COPILOT_GITHUB_TOKEN` |
 | Google Gemini | API key | `GOOGLE_API_KEY` or `GEMINI_API_KEY` |
@@ -393,7 +393,7 @@ Full config reference: https://nexai-agent.nousresearch.com/docs/user-guide/conf
 | Custom endpoint | Config | `model.base_url` + `model.api_key` in config.yaml |
 | GitHub Copilot ACP | External | `COPILOT_CLI_PATH` or Copilot CLI |
 
-Full provider docs: https://nexai-agent.nousresearch.com/docs/integrations/providers
+Full provider docs: https://docs.nexai.dev/docs/integrations/providers
 
 ### Toolsets
 
@@ -653,7 +653,7 @@ the `cronjob` tool, the `nexai cron` CLI (`list`, `add`, `edit`,
   header/footer instead of being mirrored into the target gateway
   session (keeps role alternation intact).
 
-User docs: https://nexai-agent.nousresearch.com/docs/user-guide/features/cron
+User docs: https://docs.nexai.dev/docs/user-guide/features/cron
 
 ### Curator (skill lifecycle)
 
@@ -674,7 +674,7 @@ so nothing is lost.
 
 Config: `curator.*` (`enabled`, `interval_hours`, `min_idle_hours`,
 `stale_after_days`, `archive_after_days`, `backup.*`).
-User docs: https://nexai-agent.nousresearch.com/docs/user-guide/features/curator
+User docs: https://docs.nexai.dev/docs/user-guide/features/curator
 
 ### Kanban (multi-agent work queue)
 
@@ -697,7 +697,7 @@ schema footprint is zero outside worker processes.
   `NEXAI_KANBAN_BOARD` pinned in env); tenant is a soft namespace
   within a board for workspace-path + memory-key isolation.
 
-User docs: https://nexai-agent.nousresearch.com/docs/user-guide/features/kanban
+User docs: https://docs.nexai.dev/docs/user-guide/features/kanban
 
 ---
 
@@ -848,18 +848,18 @@ nexai config set auxiliary.vision.model <model_name>
 
 | Looking for... | Location |
 |----------------|----------|
-| Config options | `nexai config edit` or [Configuration docs](https://nexai-agent.nousresearch.com/docs/user-guide/configuration) |
-| Available tools | `nexai tools list` or [Tools reference](https://nexai-agent.nousresearch.com/docs/reference/tools-reference) |
-| Slash commands | `/help` in session or [Slash commands reference](https://nexai-agent.nousresearch.com/docs/reference/slash-commands) |
-| Skills catalog | `nexai skills browse` or [Skills catalog](https://nexai-agent.nousresearch.com/docs/reference/skills-catalog) |
-| Provider setup | `nexai model` or [Providers guide](https://nexai-agent.nousresearch.com/docs/integrations/providers) |
-| Platform setup | `nexai gateway setup` or [Messaging docs](https://nexai-agent.nousresearch.com/docs/user-guide/messaging/) |
-| MCP servers | `nexai mcp list` or [MCP guide](https://nexai-agent.nousresearch.com/docs/user-guide/features/mcp) |
-| Profiles | `nexai profile list` or [Profiles docs](https://nexai-agent.nousresearch.com/docs/user-guide/profiles) |
-| Cron jobs | `nexai cron list` or [Cron docs](https://nexai-agent.nousresearch.com/docs/user-guide/features/cron) |
-| Memory | `nexai memory status` or [Memory docs](https://nexai-agent.nousresearch.com/docs/user-guide/features/memory) |
-| Env variables | `nexai config env-path` or [Env vars reference](https://nexai-agent.nousresearch.com/docs/reference/environment-variables) |
-| CLI commands | `nexai --help` or [CLI reference](https://nexai-agent.nousresearch.com/docs/reference/cli-commands) |
+| Config options | `nexai config edit` or [Configuration docs](https://docs.nexai.dev/docs/user-guide/configuration) |
+| Available tools | `nexai tools list` or [Tools reference](https://docs.nexai.dev/docs/reference/tools-reference) |
+| Slash commands | `/help` in session or [Slash commands reference](https://docs.nexai.dev/docs/reference/slash-commands) |
+| Skills catalog | `nexai skills browse` or [Skills catalog](https://docs.nexai.dev/docs/reference/skills-catalog) |
+| Provider setup | `nexai model` or [Providers guide](https://docs.nexai.dev/docs/integrations/providers) |
+| Platform setup | `nexai gateway setup` or [Messaging docs](https://docs.nexai.dev/docs/user-guide/messaging/) |
+| MCP servers | `nexai mcp list` or [MCP guide](https://docs.nexai.dev/docs/user-guide/features/mcp) |
+| Profiles | `nexai profile list` or [Profiles docs](https://docs.nexai.dev/docs/user-guide/profiles) |
+| Cron jobs | `nexai cron list` or [Cron docs](https://docs.nexai.dev/docs/user-guide/features/cron) |
+| Memory | `nexai memory status` or [Memory docs](https://docs.nexai.dev/docs/user-guide/features/memory) |
+| Env variables | `nexai config env-path` or [Env vars reference](https://docs.nexai.dev/docs/reference/environment-variables) |
+| CLI commands | `nexai --help` or [CLI reference](https://docs.nexai.dev/docs/reference/cli-commands) |
 | Gateway logs | `~/.nexai/logs/gateway.log` |
 | Session files | `~/.nexai/sessions/` or `nexai sessions browse` |
 | Source code | `~/.nexai/nexai-agent/` |
@@ -868,7 +868,7 @@ nexai config set auxiliary.vision.model <model_name>
 
 ## Contributor Quick Reference
 
-For occasional contributors and PR authors. Full developer docs: https://nexai-agent.nousresearch.com/docs/developer-guide/
+For occasional contributors and PR authors. Full developer docs: https://docs.nexai.dev/docs/developer-guide/
 
 ### Project Layout
 

@@ -79,7 +79,7 @@ def _discord_request(
         headers={
             "Authorization": f"Bot {token}",
             "Content-Type": "application/json",
-            "User-Agent": "nexai-Agent (https://github.com/NousResearch/nexai-agent)",
+            "User-Agent": "nexai-Agent (https://github.com/DevNX/nexai-agent)",
         },
     )
 

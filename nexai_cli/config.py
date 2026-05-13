@@ -1418,13 +1418,13 @@ DEFAULT_CONFIG = {
     },
 
     # Remotely-hosted model catalog manifest.  When enabled, the CLI fetches
-    # curated model lists for OpenRouter and Nous Portal from this URL,
+    # curated model lists for OpenRouter and NexAi Portal from this URL,
     # falling back to the in-repo snapshot on network failure.  Lets us
     # update model picker lists without shipping a nexai-agent release.
     # The default URL is served by the docs site GitHub Pages deploy.
     "model_catalog": {
         "enabled": True,
-        "url": "https://nexai-agent.nousresearch.com/docs/api/model-catalog.json",
+        "url": "https://docs.nexai.dev/docs/api/model-catalog.json",
         # Disk cache TTL in hours.  Beyond this, the CLI refetches on the
         # next /model or `nexai model` invocation; network failures
         # silently fall back to the stale cache.
@@ -1566,7 +1566,7 @@ ENV_VARS_BY_VERSION: Dict[int, List[str]] = {
 
 # Required environment variables with metadata for migration prompts.
 # LLM provider is required but handled in the setup wizard's provider
-# selection step (Nous Portal / OpenRouter / Custom endpoint), so this
+# selection step (NexAi Portal / OpenRouter / Custom endpoint), so this
 # dict is intentionally empty — no single env var is universally required.
 REQUIRED_ENV_VARS = {}
 
@@ -1574,8 +1574,8 @@ REQUIRED_ENV_VARS = {}
 OPTIONAL_ENV_VARS = {
     # ── Provider (handled in provider selection, not shown in checklists) ──
     "NOUS_BASE_URL": {
-        "description": "Nous Portal base URL override",
-        "prompt": "Nous Portal base URL (leave empty for default)",
+        "description": "NexAi Portal base URL override",
+        "prompt": "NexAi Portal base URL (leave empty for default)",
         "url": None,
         "password": False,
         "category": "provider",
@@ -2011,7 +2011,7 @@ OPTIONAL_ENV_VARS = {
         "advanced": True,
     },
     "TOOL_GATEWAY_DOMAIN": {
-        "description": "Shared tool-gateway domain suffix for Nous Subscribers only, used to derive vendor hosts, e.g. nousresearch.com -> firecrawl-gateway.nousresearch.com",
+        "description": "Shared tool-gateway domain suffix for Nous Subscribers only, used to derive vendor hosts, e.g. devnx.com -> firecrawl-gateway.devnx.com",
         "prompt": "Tool-gateway domain suffix",
         "url": None,
         "password": False,
@@ -4220,7 +4220,7 @@ _FALLBACK_COMMENT = """
 # Supported providers:
 #   openrouter   (OPENROUTER_API_KEY)  — routes to any model
 #   openai-codex (OAuth — nexai auth) — OpenAI Codex
-#   nous         (OAuth — nexai auth) — Nous Portal
+#   nous         (OAuth — nexai auth) — NexAi Portal
 #   zai          (ZAI_API_KEY)         — Z.AI / GLM
 #   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
 #   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
@@ -4252,7 +4252,7 @@ _COMMENTED_SECTIONS = """
 # Supported providers:
 #   openrouter   (OPENROUTER_API_KEY)  — routes to any model
 #   openai-codex (OAuth — nexai auth) — OpenAI Codex
-#   nous         (OAuth — nexai auth) — Nous Portal
+#   nous         (OAuth — nexai auth) — NexAi Portal
 #   zai          (ZAI_API_KEY)         — Z.AI / GLM
 #   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
 #   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)

@@ -66,7 +66,7 @@ Watch a GitHub repo (set `GITHUB_TOKEN` in `~/.nexai/.env` to avoid the 60 req/h
 
 ```bash
 python $NEXAI_HOME/skills/devops/watchers/scripts/watch_github.py \
-  --name nexai-issues --repo NousResearch/nexai-agent --scope issues
+  --name nexai-issues --repo DevNX/nexai-agent --scope issues
 ```
 
 Poll an arbitrary JSON API:

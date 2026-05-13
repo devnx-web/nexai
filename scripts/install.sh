@@ -145,7 +145,7 @@ print_banner() {
     echo "┌─────────────────────────────────────────────────────────┐"
     echo "│             ⚕ nexai Agent Installer                    │"
     echo "├─────────────────────────────────────────────────────────┤"
-    echo "│  An open source AI agent by Nous Research.              │"
+    echo "│  An open source AI agent by DevNX.              │"
     echo "└─────────────────────────────────────────────────────────┘"
     echo -e "${NC}"
 }

@@ -8,7 +8,7 @@ version = "0.13.0"
 description = "The self-improving AI agent — creates skills from experience, improves them during use, and runs anywhere"
 readme = "README.md"
 requires-python = ">=3.11"
-authors = [{ name = "Nous Research" }]
+authors = [{ name = "DevNX" }]
 license = { text = "MIT" }
 dependencies = [
   # Core — every direct dep is exact-pinned to ==X.Y.Z (no ranges).
@@ -167,7 +167,7 @@ youtube = [
 # `nexai dashboard` (localhost SPA + API).  Not in core to keep the default install lean.
 web = ["fastapi==0.133.1", "uvicorn[standard]==0.41.0"]
 rl = [
-  "atroposlib @ git+https://github.com/NousResearch/atropos.git@c20c85256e5a45ad31edf8b7276e9c5ee1995a30",
+  "atroposlib @ git+https://github.com/DevNX/atropos.git@c20c85256e5a45ad31edf8b7276e9c5ee1995a30",
   "tinker @ git+https://github.com/thinking-machines-lab/tinker.git@30517b667f18a3dfb7ef33fb56cf686d5820ba2b",
   "fastapi==0.133.1",
   "uvicorn[standard]==0.41.0",

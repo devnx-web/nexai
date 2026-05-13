@@ -18,7 +18,7 @@ class TestBuildOrHeaders:
         from agent.auxiliary_client import build_or_headers
 
         headers = build_or_headers(or_config={"response_cache": False})
-        assert headers["HTTP-Referer"] == "https://nexai-agent.nousresearch.com"
+        assert headers["HTTP-Referer"] == "https://docs.nexai.dev"
         assert headers["X-Title"] == "nexai Agent"
         assert headers["X-OpenRouter-Categories"] == "productivity,cli-agent"
 

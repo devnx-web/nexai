@@ -6,7 +6,7 @@ Usage (via cron with --no-agent):
     nexai cron create nexai-issues \\
       --schedule "*/5 * * * *" --no-agent \\
       --script "$NEXAI_HOME/skills/devops/watchers/scripts/watch_github.py" \\
-      --script-args "--name nexai-issues --repo NousResearch/nexai-agent --scope issues"
+      --script-args "--name nexai-issues --repo DevNX/nexai-agent --scope issues"
 
 Set GITHUB_TOKEN (or GH_TOKEN) in ~/.nexai/.env to avoid the 60 req/hr
 anonymous rate limit.

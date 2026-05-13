@@ -2909,7 +2909,7 @@ def check_for_skill_updates(
 # nexai centralized index source
 # ---------------------------------------------------------------------------
 
-NEXAI_INDEX_URL = "https://nexai-agent.nousresearch.com/docs/api/skills-index.json"
+NEXAI_INDEX_URL = "https://docs.nexai.dev/docs/api/skills-index.json"
 NEXAI_INDEX_CACHE_FILE = INDEX_CACHE_DIR / "nexai-index.json"
 NEXAI_INDEX_TTL = 6 * 3600  # 6 hours
 

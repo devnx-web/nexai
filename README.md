@@ -5,9 +5,9 @@
 # NexAi Agent ☤
 
 <p align="center">
-  <a href="https://nexai-agent.nousresearch.com/docs/"><img src="https://img.shields.io/badge/Docs-nexai--agent.nousresearch.com-FFD700?style=for-the-badge" alt="Documentation"></a>
-  <a href="https://discord.gg/NousResearch"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://github.com/NousResearch/nexai-agent/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT"></a>
+  <a href="https://docs.nexai.dev/docs/"><img src="https://img.shields.io/badge/Docs-nexai--agent.devnx.com-FFD700?style=for-the-badge" alt="Documentation"></a>
+  <a href="https://discord.gg/DevNX"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
+  <a href="https://github.com/DevNX/nexai-agent/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT"></a>
   <a href="https://devnx.com"><img src="https://img.shields.io/badge/Built%20by-DevNX-blueviolet?style=for-the-badge" alt="Built by DevNX"></a>
   <a href="README.zh-CN.md"><img src="https://img.shields.io/badge/Lang-中文-red?style=for-the-badge" alt="中文"></a>
 </p>
@@ -33,24 +33,24 @@ Use any model you want — [OpenRouter](https://openrouter.ai) (200+ models), [N
 ### Linux, macOS, WSL2, Termux
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/NousResearch/nexai-agent/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/DevNX/nexai-agent/main/scripts/install.sh | bash
 ```
 
 ### Windows (native, PowerShell) — Early Beta
 
-> **Heads up:** Native Windows support is **early beta**. It installs and runs, but hasn't been road-tested as broadly as our Linux/macOS/WSL2 paths. Please [file issues](https://github.com/NousResearch/nexai-agent/issues) when you hit rough edges. For the most battle-tested Windows setup today, run the Linux/macOS one-liner above inside **WSL2**.
+> **Heads up:** Native Windows support is **early beta**. It installs and runs, but hasn't been road-tested as broadly as our Linux/macOS/WSL2 paths. Please [file issues](https://github.com/DevNX/nexai-agent/issues) when you hit rough edges. For the most battle-tested Windows setup today, run the Linux/macOS one-liner above inside **WSL2**.
 
 Run this in PowerShell:
 
 ```powershell
-irm https://raw.githubusercontent.com/NousResearch/nexai-agent/main/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/DevNX/nexai-agent/main/scripts/install.ps1 | iex
 ```
 
 The installer handles everything: uv, Python 3.11, Node.js, ripgrep, ffmpeg, **and a portable Git Bash** (MinGit, unpacked to `%LOCALAPPDATA%\nexai\git` — no admin required, completely isolated from any system Git install).  nexai uses this bundled Git Bash to run shell commands.
 
 If you already have Git installed, the installer detects it and uses that instead.  Otherwise a ~45MB MinGit download is all you need — it won't touch or interfere with any system Git.
 
-> **Android / Termux:** The tested manual path is documented in the [Termux guide](https://nexai-agent.nousresearch.com/docs/getting-started/termux). On Termux, nexai installs a curated `.[termux]` extra because the full `.[all]` extra currently pulls Android-incompatible voice dependencies.
+> **Android / Termux:** The tested manual path is documented in the [Termux guide](https://docs.nexai.dev/docs/getting-started/termux). On Termux, nexai installs a curated `.[termux]` extra because the full `.[all]` extra currently pulls Android-incompatible voice dependencies.
 >
 > **Windows:** Native Windows is supported as an **early beta** — the PowerShell one-liner above installs everything, but expect rough edges and please file issues when you hit them. If you'd rather use WSL2 (our most battle-tested Windows path), the Linux command works there too. Native Windows install lives under `%LOCALAPPDATA%\nexai`; WSL2 installs under `~/.nexai` as on Linux.  The only nexai feature that currently needs WSL2 specifically is the browser-based dashboard chat pane (it uses a POSIX PTY — classic CLI and gateway both run natively).
 
@@ -77,7 +77,7 @@ nexai update       # Update to the latest version
 nexai doctor       # Diagnose any issues
 ```
 
-📖 **[Full documentation →](https://nexai-agent.nousresearch.com/docs/)**
+📖 **[Full documentation →](https://docs.nexai.dev/docs/)**
 
 ## CLI vs Messaging Quick Reference
 
@@ -95,31 +95,31 @@ nexai has two entry points: start the terminal UI with `nexai`, or run the gatew
 | Interrupt current work | `Ctrl+C` or send a new message | `/stop` or send a new message |
 | Platform-specific status | `/platforms` | `/status`, `/sethome` |
 
-For the full command lists, see the [CLI guide](https://nexai-agent.nousresearch.com/docs/user-guide/cli) and the [Messaging Gateway guide](https://nexai-agent.nousresearch.com/docs/user-guide/messaging).
+For the full command lists, see the [CLI guide](https://docs.nexai.dev/docs/user-guide/cli) and the [Messaging Gateway guide](https://docs.nexai.dev/docs/user-guide/messaging).
 
 ---
 
 ## Documentation
 
-All documentation lives at **[nexai-agent.nousresearch.com/docs](https://nexai-agent.nousresearch.com/docs/)**:
+All documentation lives at **[docs.nexai.dev/docs](https://docs.nexai.dev/docs/)**:
 
 | Section | What's Covered |
 |---------|---------------|
-| [Quickstart](https://nexai-agent.nousresearch.com/docs/getting-started/quickstart) | Install → setup → first conversation in 2 minutes |
-| [CLI Usage](https://nexai-agent.nousresearch.com/docs/user-guide/cli) | Commands, keybindings, personalities, sessions |
-| [Configuration](https://nexai-agent.nousresearch.com/docs/user-guide/configuration) | Config file, providers, models, all options |
-| [Messaging Gateway](https://nexai-agent.nousresearch.com/docs/user-guide/messaging) | Telegram, Discord, Slack, WhatsApp, Signal, Home Assistant |
-| [Security](https://nexai-agent.nousresearch.com/docs/user-guide/security) | Command approval, DM pairing, container isolation |
-| [Tools & Toolsets](https://nexai-agent.nousresearch.com/docs/user-guide/features/tools) | 40+ tools, toolset system, terminal backends |
-| [Skills System](https://nexai-agent.nousresearch.com/docs/user-guide/features/skills) | Procedural memory, Skills Hub, creating skills |
-| [Memory](https://nexai-agent.nousresearch.com/docs/user-guide/features/memory) | Persistent memory, user profiles, best practices |
-| [MCP Integration](https://nexai-agent.nousresearch.com/docs/user-guide/features/mcp) | Connect any MCP server for extended capabilities |
-| [Cron Scheduling](https://nexai-agent.nousresearch.com/docs/user-guide/features/cron) | Scheduled tasks with platform delivery |
-| [Context Files](https://nexai-agent.nousresearch.com/docs/user-guide/features/context-files) | Project context that shapes every conversation |
-| [Architecture](https://nexai-agent.nousresearch.com/docs/developer-guide/architecture) | Project structure, agent loop, key classes |
-| [Contributing](https://nexai-agent.nousresearch.com/docs/developer-guide/contributing) | Development setup, PR process, code style |
-| [CLI Reference](https://nexai-agent.nousresearch.com/docs/reference/cli-commands) | All commands and flags |
-| [Environment Variables](https://nexai-agent.nousresearch.com/docs/reference/environment-variables) | Complete env var reference |
+| [Quickstart](https://docs.nexai.dev/docs/getting-started/quickstart) | Install → setup → first conversation in 2 minutes |
+| [CLI Usage](https://docs.nexai.dev/docs/user-guide/cli) | Commands, keybindings, personalities, sessions |
+| [Configuration](https://docs.nexai.dev/docs/user-guide/configuration) | Config file, providers, models, all options |
+| [Messaging Gateway](https://docs.nexai.dev/docs/user-guide/messaging) | Telegram, Discord, Slack, WhatsApp, Signal, Home Assistant |
+| [Security](https://docs.nexai.dev/docs/user-guide/security) | Command approval, DM pairing, container isolation |
+| [Tools & Toolsets](https://docs.nexai.dev/docs/user-guide/features/tools) | 40+ tools, toolset system, terminal backends |
+| [Skills System](https://docs.nexai.dev/docs/user-guide/features/skills) | Procedural memory, Skills Hub, creating skills |
+| [Memory](https://docs.nexai.dev/docs/user-guide/features/memory) | Persistent memory, user profiles, best practices |
+| [MCP Integration](https://docs.nexai.dev/docs/user-guide/features/mcp) | Connect any MCP server for extended capabilities |
+| [Cron Scheduling](https://docs.nexai.dev/docs/user-guide/features/cron) | Scheduled tasks with platform delivery |
+| [Context Files](https://docs.nexai.dev/docs/user-guide/features/context-files) | Project context that shapes every conversation |
+| [Architecture](https://docs.nexai.dev/docs/developer-guide/architecture) | Project structure, agent loop, key classes |
+| [Contributing](https://docs.nexai.dev/docs/developer-guide/contributing) | Development setup, PR process, code style |
+| [CLI Reference](https://docs.nexai.dev/docs/reference/cli-commands) | All commands and flags |
+| [Environment Variables](https://docs.nexai.dev/docs/reference/environment-variables) | Complete env var reference |
 
 ---
 
@@ -154,12 +154,12 @@ See `nexai claw migrate --help` for all options, or use the `openclaw-migration`
 
 ## Contributing
 
-We welcome contributions! See the [Contributing Guide](https://nexai-agent.nousresearch.com/docs/developer-guide/contributing) for development setup, code style, and PR process.
+We welcome contributions! See the [Contributing Guide](https://docs.nexai.dev/docs/developer-guide/contributing) for development setup, code style, and PR process.
 
 Quick start for contributors — clone and go with `setup-nexai.sh`:
 
 ```bash
-git clone https://github.com/NousResearch/nexai-agent.git
+git clone https://github.com/DevNX/nexai-agent.git
 cd nexai-agent
 ./setup-nexai.sh     # installs uv, creates venv, installs .[all], symlinks ~/.local/bin/nexai
 ./nexai              # auto-detects the venv, no need to `source` first
@@ -175,15 +175,15 @@ uv pip install -e ".[all,dev]"
 scripts/run_tests.sh
 ```
 
-> **RL Training (optional):** The RL/Atropos integration (`environments/`) — see [`CONTRIBUTING.md`](https://github.com/NousResearch/nexai-agent/blob/main/CONTRIBUTING.md#development-setup) for the full setup.
+> **RL Training (optional):** The RL/Atropos integration (`environments/`) — see [`CONTRIBUTING.md`](https://github.com/DevNX/nexai-agent/blob/main/CONTRIBUTING.md#development-setup) for the full setup.
 
 ---
 
 ## Community
 
-- 💬 [Discord](https://discord.gg/NousResearch)
+- 💬 [Discord](https://discord.gg/DevNX)
 - 📚 [Skills Hub](https://agentskills.io)
-- 🐛 [Issues](https://github.com/NousResearch/nexai-agent/issues)
+- 🐛 [Issues](https://github.com/DevNX/nexai-agent/issues)
 - 🔌 [nexaiClaw](https://github.com/AaronWong1999/nexaiclaw) — Community WeChat bridge: Run NexAi Agent and OpenClaw on the same WeChat account.
 
 ---

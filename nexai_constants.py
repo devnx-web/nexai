@@ -25,7 +25,7 @@ def get_nexai_home() -> Path:
     callers that import this at load time.  Subprocess spawners are
     expected to propagate ``NEXAI_HOME`` explicitly (see the systemd
     template in ``nexai_cli/gateway.py`` and the kanban dispatcher in
-    ``nexai_cli/kanban_db.py``).  See https://github.com/NousResearch/nexai-agent/issues/18594.
+    ``nexai_cli/kanban_db.py``).  See https://github.com/DevNX/nexai-agent/issues/18594.
     """
     val = os.environ.get("NEXAI_HOME", "").strip()
     if val:

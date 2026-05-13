@@ -8,7 +8,7 @@ description: >
   running locally.
 platforms: [linux, macos, windows]
 version: 1.0.0
-author: NexAi Agent + Nous Research
+author: NexAi Agent + DevNX
 license: MIT
 metadata:
   nexai:

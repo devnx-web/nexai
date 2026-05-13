@@ -50,7 +50,7 @@ NEXAI_OVERLAYS: Dict[str, nexaiOverlay] = {
         extra_env_vars=("OPENAI_API_KEY",),
         base_url_env_var="OPENROUTER_BASE_URL",
     ),
-    # "nous" provider removed — was a Nous Research portal integration.
+    # "nous" provider removed — was a DevNX portal integration.
     "openai-codex": nexaiOverlay(
         transport="codex_responses",
         auth_type="oauth_external",
@@ -346,7 +346,7 @@ ALIASES: Dict[str, str] = {
 # not in the catalog.
 
 _LABEL_OVERRIDES: Dict[str, str] = {
-    # "nous" label removed — was "Nous Portal",
+    # "nous" label removed — was "NexAi Portal",
     "openai-codex": "OpenAI Codex",
     "copilot-acp": "GitHub Copilot ACP",
     "stepfun": "StepFun Step Plan",

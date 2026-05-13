@@ -145,7 +145,7 @@ DEFAULT_AGENT_IDENTITY = (
 NEXAI_AGENT_HELP_GUIDANCE = (
     "If the user asks about configuring, setting up, or using nexai Agent "
     "itself, load the `nexai-agent` skill with skill_view(name='nexai-agent') "
-    "before answering. Docs: https://nexai-agent.nousresearch.com/docs"
+    "before answering. Docs: https://docs.nexai.dev/docs"
 )
 
 MEMORY_GUIDANCE = (

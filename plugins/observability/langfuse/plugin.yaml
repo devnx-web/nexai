@@ -1,7 +1,7 @@
 name: langfuse
 version: "1.0.0"
 description: "Optional Langfuse observability for NexAi — traces conversations, LLM calls, and tool usage. Opt-in via `nexai plugins enable observability/langfuse` or `nexai tools → Langfuse Observability`."
-author: NousResearch
+author: DevNX
 requires_env:
   - NEXAI_LANGFUSE_PUBLIC_KEY
   - NEXAI_LANGFUSE_SECRET_KEY

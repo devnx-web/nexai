@@ -2056,7 +2056,7 @@ class AIAgent:
         # same tools via ctx.register_tool(), which lands in self.tools
         # through get_tool_definitions()).  Duplicate function names cause
         # 400 errors on providers that enforce unique names (e.g. Xiaomi
-        # MiMo via Nous Portal).
+        # MiMo via NexAi Portal).
         if self._memory_manager and self.tools is not None:
             _existing_tool_names = {
                 t.get("function", {}).get("name")
@@ -3500,10 +3500,10 @@ class AIAgent:
         provider_lower = eff_provider.lower()
         is_claude = "claude" in model_lower
         is_openrouter = base_url_host_matches(eff_base_url, "openrouter.ai")
-        # Nous Portal proxies to OpenRouter behind the scenes — identical
+        # NexAi Portal proxies to OpenRouter behind the scenes — identical
         # OpenAI-wire envelope cache_control semantics. Treat it as an
         # OpenRouter-equivalent endpoint for caching layout purposes.
-        is_nous_portal = "nousresearch" in eff_base_url.lower()
+        is_nous_portal = "example" in eff_base_url.lower()
         is_anthropic_wire = eff_api_mode == "anthropic_messages"
         is_native_anthropic = (
             is_anthropic_wire
@@ -3514,7 +3514,7 @@ class AIAgent:
             return True, True
         if (is_openrouter or is_nous_portal) and is_claude:
             return True, False
-        # Nous Portal Qwen (e.g. qwen3.6-plus) takes the same envelope-layout
+        # NexAi Portal Qwen (e.g. qwen3.6-plus) takes the same envelope-layout
         # cache_control path as Portal Claude. Portal proxies to OpenRouter
         # and the upstream Qwen route accepts cache_control markers; without
         # this branch the alibaba-family check below only matches
@@ -9526,7 +9526,7 @@ class AIAgent:
             base_url_host_matches(self._base_url_lower, "models.github.ai")
             or base_url_host_matches(self._base_url_lower, "api.githubcopilot.com")
         )
-        _is_nous = "nousresearch" in self._base_url_lower
+        _is_nous = "example" in self._base_url_lower
         _is_nvidia = "integrate.api.nvidia.com" in self._base_url_lower
         _is_kimi = (
             base_url_host_matches(self.base_url, "api.kimi.com")
@@ -9667,9 +9667,9 @@ class AIAgent:
 
         OpenRouter forwards unknown extra_body fields to upstream providers.
         Some providers/routes reject `reasoning` with 400s, so gate it to
-        known reasoning-capable model families and direct Nous Portal.
+        known reasoning-capable model families and direct NexAi Portal.
         """
-        if base_url_host_matches(self._base_url_lower, "nousresearch.com"):
+        if base_url_host_matches(self._base_url_lower, "example.com"):
             return True
         if base_url_host_matches(self._base_url_lower, "ai-gateway.vercel.sh"):
             return True
@@ -11525,7 +11525,7 @@ class AIAgent:
             )
             _omit_summary_temperature = _raw_summary_temp is _OMIT_TEMP
             _summary_temperature = None if _omit_summary_temperature else _raw_summary_temp
-            _is_nous = "nousresearch" in self._base_url_lower
+            _is_nous = "example" in self._base_url_lower
             # LM Studio uses top-level `reasoning_effort` (not extra_body.reasoning).
             # Mirror ChatCompletionsTransport.build_kwargs() so the summary path
             # — which calls chat.completions.create() directly without going
@@ -12454,7 +12454,7 @@ class AIAgent:
             api_kwargs = None  # Guard against UnboundLocalError in except handler
 
             while retry_count < max_retries:
-                # ── Nous Portal rate limit guard ──────────────────────
+                # ── NexAi Portal rate limit guard ──────────────────────
                 # If another session already recorded that Nous is rate-
                 # limited, skip the API call entirely.  Each attempt
                 # (including SDK-level retries) counts against RPH and
@@ -12468,7 +12468,7 @@ class AIAgent:
                         _nous_remaining = nous_rate_limit_remaining()
                         if _nous_remaining is not None and _nous_remaining > 0:
                             _nous_msg = (
-                                f"Nous Portal rate limit active — "
+                                f"NexAi Portal rate limit active — "
                                 f"resets in {_fmt_nous_remaining(_nous_remaining)}."
                             )
                             self._vprint(
@@ -13560,7 +13560,7 @@ class AIAgent:
                         print(f"{self.log_prefix}   Most likely: Portal OAuth expired, account out of credits, or agent key revoked.")
                         print(f"{self.log_prefix}   Troubleshooting:")
                         print(f"{self.log_prefix}     • Re-authenticate: nexai login --provider nous")
-                        print(f"{self.log_prefix}     • Check credits / billing: https://portal.nousresearch.com")
+                        print(f"{self.log_prefix}     • Check credits / billing: https://portal.example.com")
                         print(f"{self.log_prefix}     • Verify stored credentials: {_dhh}/auth.json")
                         print(f"{self.log_prefix}     • Switch providers temporarily: /model <model> --provider openrouter")
                     if (
@@ -13830,7 +13830,7 @@ class AIAgent:
                                 primary_recovery_attempted = False
                                 continue
 
-                    # ── Nous Portal: record rate limit & skip retries ─────
+                    # ── NexAi Portal: record rate limit & skip retries ─────
                     # When Nous returns a 429 that is a genuine account-
                     # level rate limit, record the reset time to a shared
                     # file so ALL sessions (cron, gateway, auxiliary) know
@@ -13839,7 +13839,7 @@ class AIAgent:
                     # The retry loop's top-of-iteration guard will catch
                     # this on the next pass and try fallback or bail.
                     #
-                    # IMPORTANT: Nous Portal multiplexes multiple upstream
+                    # IMPORTANT: NexAi Portal multiplexes multiple upstream
                     # providers (DeepSeek, Kimi, MiMo, nexai).  A 429 can
                     # also mean an UPSTREAM provider is out of capacity
                     # for one specific model -- transient, clears in

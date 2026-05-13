@@ -63,7 +63,7 @@ _NEXAI_MODEL_WARNING = (
 # happen to carry "nexai" in their tag but are fully tool-capable.
 #
 # Positive examples the regex must match:
-#   NousResearch/nexai-3-Llama-3.1-70B, nexai-4-405b, openrouter/nexai3:70b
+#   DevNX/nexai-3-Llama-3.1-70B, nexai-4-405b, openrouter/nexai3:70b
 # Negative examples it must NOT match:
 #   nexai-brain:qwen3-14b-ctx16k, qwen3:14b, claude-opus-4-6
 _NOUS_NEXAI_NON_AGENTIC_RE = re.compile(
@@ -1161,7 +1161,7 @@ def list_authenticated_providers(
     # Build curated model lists keyed by nexai provider ID
     curated: dict[str, list[str]] = dict(_PROVIDER_MODELS)
     curated["openrouter"] = [mid for mid, _ in OPENROUTER_MODELS]
-    # "nous" provider removed — was a Nous Research portal integration.
+    # "nous" provider removed — was a DevNX portal integration.
     # curated["nous"] = get_curated_nous_model_ids()
     # Ollama Cloud uses dynamic discovery (no static curated list)
     if "ollama-cloud" not in curated:

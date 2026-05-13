@@ -45,7 +45,7 @@ Bundled skills (in `skills/`) ship with every nexai install. They should be **br
 
 If your skill is official and useful but not universally needed (e.g., a paid service integration, a heavyweight dependency), put it in **`optional-skills/`** — it ships with the repo but isn't activated by default. Users can discover it via `nexai skills browse` (labeled "official") and install it with `nexai skills install` (no third-party warning, builtin trust).
 
-If your skill is specialized, community-contributed, or niche, it's better suited for a **Skills Hub** — upload it to a skills registry and share it in the [DevNX Discord](https://discord.gg/NousResearch). Users can install it with `nexai skills install`.
+If your skill is specialized, community-contributed, or niche, it's better suited for a **Skills Hub** — upload it to a skills registry and share it in the [DevNX Discord](https://discord.gg/DevNX). Users can install it with `nexai skills install`.
 
 ---
 
@@ -63,7 +63,7 @@ If your skill is specialized, community-contributed, or niche, it's better suite
 ### Clone and install
 
 ```bash
-git clone --recurse-submodules https://github.com/NousResearch/nexai-agent.git
+git clone --recurse-submodules https://github.com/DevNX/nexai-agent.git
 cd nexai-agent
 
 # Create venv with Python 3.11
@@ -180,7 +180,7 @@ nexai-agent/
 ├── optional-skills/          # Official optional skills (discoverable via hub, not activated by default)
 ├── environments/             # RL training environments (Atropos integration)
 ├── tests/                    # Test suite
-├── website/                  # Documentation site (nexai-agent.nousresearch.com)
+├── website/                  # Documentation site (docs.nexai.dev)
 │
 ├── cli-config.yaml.example   # Example configuration (copied to ~/.nexai/config.yaml)
 └── AGENTS.md                 # Development guide for AI coding assistants
@@ -794,7 +794,7 @@ test(tools): add unit tests for file_operations
 
 ## Reporting Issues
 
-- Use [GitHub Issues](https://github.com/NousResearch/nexai-agent/issues)
+- Use [GitHub Issues](https://github.com/DevNX/nexai-agent/issues)
 - Include: OS, Python version, nexai version (`nexai version`), full error traceback
 - Include steps to reproduce
 - Check existing issues before creating duplicates
@@ -804,7 +804,7 @@ test(tools): add unit tests for file_operations
 
 ## Community
 
-- **Discord**: [discord.gg/NousResearch](https://discord.gg/NousResearch) — for questions, showcasing projects, and sharing skills
+- **Discord**: [discord.gg/DevNX](https://discord.gg/DevNX) — for questions, showcasing projects, and sharing skills
 - **GitHub Discussions**: For design proposals and architecture discussions
 - **Skills Hub**: Upload specialized skills to a registry and share them with the community
 

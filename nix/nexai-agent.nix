@@ -204,7 +204,7 @@ stdenv.mkDerivation {
 
   meta = with lib; {
     description = "AI agent with advanced tool-calling capabilities";
-    homepage = "https://github.com/NousResearch/nexai-agent";
+    homepage = "https://github.com/DevNX/nexai-agent";
     mainProgram = "nexai";
     license = licenses.mit;
     platforms = platforms.unix;

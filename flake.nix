@@ -1,5 +1,5 @@
 {
-  description = "nexai Agent - AI agent framework by Nous Research";
+  description = "nexai Agent - AI agent framework by DevNX";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

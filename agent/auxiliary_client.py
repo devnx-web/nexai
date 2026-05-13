@@ -8,7 +8,7 @@ Resolution order for text tasks (auto mode):
   1. User's main provider + main model (used regardless of provider type —
      aggregators, direct API-key providers, native Anthropic, Codex, etc.)
   2. OpenRouter  (OPENROUTER_API_KEY)
-  3. Nous Portal (~/.nexai/auth.json active provider)
+  3. NexAi Portal (~/.nexai/auth.json active provider)
   4. Custom endpoint (config.yaml model.base_url + OPENAI_API_KEY)
   5. Native Anthropic
   6. Direct API-key providers (z.ai/GLM, Kimi/Moonshot, MiniMax, MiniMax-CN)
@@ -17,7 +17,7 @@ Resolution order for text tasks (auto mode):
 Resolution order for vision/multimodal tasks (auto mode):
   1. Selected main provider, if it is one of the supported vision backends below
   2. OpenRouter
-  3. Nous Portal
+  3. NexAi Portal
   4. Native Anthropic
   5. Custom endpoint (for local vision models: Qwen-VL, LLaVA, Pixtral, etc.)
   6. None
@@ -309,7 +309,7 @@ _PROVIDERS_WITHOUT_VISION: frozenset = frozenset({
 # `X-Title` is the canonical attribution header OpenRouter's dashboard
 # reads; the previous `X-OpenRouter-Title` label was not recognized there.
 _OR_HEADERS_BASE = {
-    "HTTP-Referer": "https://nexai-agent.nousresearch.com",
+    "HTTP-Referer": "https://docs.nexai.dev",
     "X-Title": "nexai Agent",
     "X-OpenRouter-Categories": "productivity,cli-agent",
 }
@@ -374,14 +374,14 @@ def build_or_headers(or_config: dict | None = None) -> dict:
 from nexai_cli import __version__ as _NEXAI_VERSION
 
 _AI_GATEWAY_HEADERS = {
-    "HTTP-Referer": "https://nexai-agent.nousresearch.com",
+    "HTTP-Referer": "https://docs.nexai.dev",
     "X-Title": "nexai Agent",
     "User-Agent": f"nexaiAgent/{_NEXAI_VERSION}",
 }
 
-# Nous Portal extra_body for product attribution.
+# NexAi Portal extra_body for product attribution.
 # Callers should pass this as extra_body in chat.completions.create()
-# when the auxiliary client is backed by Nous Portal.
+# when the auxiliary client is backed by NexAi Portal.
 #
 # The tags are computed from agent.portal_tags so the client= marker stays
 # in lockstep with nexai_cli.__version__ across every Portal call site
@@ -391,7 +391,7 @@ from agent.portal_tags import nous_portal_tags as _nous_portal_tags
 
 
 def _nous_extra_body() -> dict:
-    """Return a fresh Nous Portal ``extra_body`` dict.
+    """Return a fresh NexAi Portal ``extra_body`` dict.
 
     Computed at call time so a hot-reloaded ``nexai_cli.__version__`` is
     reflected without restarting long-running processes.
@@ -405,13 +405,13 @@ def _nous_extra_body() -> dict:
 # ``_nous_extra_body()`` or import ``nous_portal_tags`` directly.
 NOUS_EXTRA_BODY = _nous_extra_body()
 
-# Set at resolve time — True if the auxiliary client points to Nous Portal
+# Set at resolve time — True if the auxiliary client points to NexAi Portal
 auxiliary_is_nous: bool = False
 
 # Default auxiliary models per provider
 _OPENROUTER_MODEL = "google/gemini-3-flash-preview"
 _NOUS_MODEL = "google/gemini-3-flash-preview"
-_NOUS_DEFAULT_BASE_URL = "https://inference-api.nousresearch.com/v1"
+_NOUS_DEFAULT_BASE_URL = "https://api.example.com/v1"
 _ANTHROPIC_DEFAULT_BASE_URL = "https://api.anthropic.com"
 _AUTH_JSON_PATH = get_nexai_home() / "auth.json"
 
@@ -1443,7 +1443,7 @@ def _try_nous(vision: bool = False) -> Tuple[Optional[OpenAI], Optional[str]]:
         _remaining = nous_rate_limit_remaining()
         if _remaining is not None and _remaining > 0:
             logger.debug(
-                "Auxiliary: skipping Nous Portal (rate-limited, resets in %.0fs)",
+                "Auxiliary: skipping NexAi Portal (rate-limited, resets in %.0fs)",
                 _remaining,
             )
             return None, None
@@ -1456,7 +1456,7 @@ def _try_nous(vision: bool = False) -> Tuple[Optional[OpenAI], Optional[str]]:
         return None, None
     global auxiliary_is_nous
     auxiliary_is_nous = True
-    logger.debug("Auxiliary client: Nous Portal")
+    logger.debug("Auxiliary client: NexAi Portal")
 
     # Ask the Portal which model it currently recommends for this task type.
     # The /api/nous/recommended-models endpoint is the authoritative source:
@@ -2207,7 +2207,7 @@ def _recoverable_pool_provider(resolved_provider: str, client: Any) -> Optional[
         return "openai-codex"
     if base_url_host_matches(base, "openrouter.ai"):
         return "openrouter"
-    if base_url_host_matches(base, "inference-api.nousresearch.com"):
+    if base_url_host_matches(base, "inference-api.devnx.com"):
         return "nous"
     if base_url_host_matches(base, "api.anthropic.com"):
         return "anthropic"
@@ -2783,7 +2783,7 @@ def resolve_provider_client(
         return (_to_async_client(client, final_model, is_vision=is_vision) if async_mode
                 else (client, final_model))
 
-    # ── Nous Portal (OAuth) ──────────────────────────────────────────
+    # ── NexAi Portal (OAuth) ──────────────────────────────────────────
     if provider == "nous":
         # Detect vision tasks: either explicit model override from
         # _PROVIDER_VISION_MODELS, or caller passed a known vision model.
@@ -2794,7 +2794,7 @@ def resolve_provider_client(
         client, default = _try_nous(vision=_is_vision)
         if client is None:
             logger.warning("resolve_provider_client: nous requested "
-                           "but Nous Portal not configured (run: nexai auth)")
+                           "but NexAi Portal not configured (run: nexai auth)")
             return None, None
         final_model = _normalize_resolved_model(model or default, provider)
         return (_to_async_client(client, final_model, is_vision=is_vision) if async_mode
@@ -3357,7 +3357,7 @@ def resolve_vision_provider_client(
         #      strict vision backend with tier-aware defaults, so it must not
         #      fall through to the user's text chat model here.
         #   2. OpenRouter  (vision-capable aggregator fallback)
-        #   3. Nous Portal (vision-capable aggregator fallback)
+        #   3. NexAi Portal (vision-capable aggregator fallback)
         #   4. Stop
         main_provider = _read_main_provider()
         main_model = _read_main_model()
@@ -3455,8 +3455,8 @@ def resolve_vision_provider_client(
 def get_auxiliary_extra_body() -> dict:
     """Return extra_body kwargs for auxiliary API calls.
     
-    Includes Nous Portal product tags when the auxiliary client is backed
-    by Nous Portal. Returns empty dict otherwise.
+    Includes NexAi Portal product tags when the auxiliary client is backed
+    by NexAi Portal. Returns empty dict otherwise.
     """
     return _nous_extra_body() if auxiliary_is_nous else {}
 
@@ -4274,7 +4274,7 @@ def call_llm(
         # ── Nous auth refresh parity with main agent ──────────────────
         client_is_nous = (
             resolved_provider == "nous"
-            or base_url_host_matches(_base_info, "inference-api.nousresearch.com")
+            or base_url_host_matches(_base_info, "inference-api.devnx.com")
         )
         if _is_auth_error(first_err) and client_is_nous:
             refreshed_client, refreshed_model = _refresh_nous_auxiliary_client(
@@ -4625,7 +4625,7 @@ async def async_call_llm(
         # ── Nous auth refresh parity with main agent ──────────────────
         client_is_nous = (
             resolved_provider == "nous"
-            or base_url_host_matches(_client_base, "inference-api.nousresearch.com")
+            or base_url_host_matches(_client_base, "inference-api.devnx.com")
         )
         if _is_auth_error(first_err) and client_is_nous:
             refreshed_client, refreshed_model = _refresh_nous_auxiliary_client(

@@ -200,7 +200,7 @@ def show_status(args):
     nous_error = nous_status.get("error")
     nous_label = "logged in" if nous_logged_in else "not logged in (run: nexai auth add nous --type oauth)"
     print(
-        f"  {'Nous Portal':<12}  {check_mark(nous_logged_in)} "
+        f"  {'NexAi Portal':<12}  {check_mark(nous_logged_in)} "
         f"{nous_label}"
     )
     portal_url = nous_status.get("portal_base_url") or "(unknown)"
@@ -269,9 +269,9 @@ def show_status(args):
         print()
         print(color("◆ Nous Tool Gateway", Colors.CYAN, Colors.BOLD))
         if not features.nous_auth_present:
-            print("  Nous Portal   ✗ not logged in")
+            print("  NexAi Portal   ✗ not logged in")
         else:
-            print("  Nous Portal   ✓ managed tools available")
+            print("  NexAi Portal   ✓ managed tools available")
         for feature in features.items():
             if feature.managed_by_nous:
                 state = "active via Nous subscription"

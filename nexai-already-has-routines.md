@@ -149,11 +149,11 @@ nexai webhook subscribe pr-review \
   --deliver github_comment
 ```
 
-Full automation templates gallery: [nexai-agent.nousresearch.com/docs/guides/automation-templates](https://nexai-agent.nousresearch.com/docs/guides/automation-templates)
+Full automation templates gallery: [docs.nexai.dev/docs/guides/automation-templates](https://docs.nexai.dev/docs/guides/automation-templates)
 
-Documentation: [nexai-agent.nousresearch.com](https://nexai-agent.nousresearch.com)
+Documentation: [docs.nexai.dev](https://docs.nexai.dev)
 
-GitHub: [github.com/NousResearch/nexai-agent](https://github.com/NousResearch/nexai-agent)
+GitHub: [github.com/DevNX/nexai-agent](https://github.com/DevNX/nexai-agent)
 
 ---
 

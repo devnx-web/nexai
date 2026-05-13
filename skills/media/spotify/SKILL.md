@@ -15,7 +15,7 @@ metadata:
 
 # Spotify
 
-Control the user's Spotify account via the NexAi Spotify toolset (7 tools). Setup guide: https://nexai-agent.nousresearch.com/docs/user-guide/features/spotify
+Control the user's Spotify account via the NexAi Spotify toolset (7 tools). Setup guide: https://docs.nexai.dev/docs/user-guide/features/spotify
 
 ## When to use this skill
 

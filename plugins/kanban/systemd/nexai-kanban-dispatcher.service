@@ -15,7 +15,7 @@
 
 [Unit]
 Description=nexai Kanban dispatcher (DEPRECATED standalone daemon — prefer gateway-embedded dispatch)
-Documentation=https://nexai-agent.nousresearch.com/docs/user-guide/features/kanban
+Documentation=https://docs.nexai.dev/docs/user-guide/features/kanban
 After=network.target
 
 [Service]
